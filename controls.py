@@ -49,10 +49,11 @@ def update_bullets(bullets):
 def create_army(screen, inos):
     ino = Ino(screen)
     number_ino_x = 22
-    ino_width = ino.rect.width
-    
-    for ino_number in range(number_ino_x):
-        ino = Ino(screen)
-        ino.x = 50 + 50 * ino_number
-        ino.rect.x = ino.x
-        inos.add(ino)
+    for row_ino in range(5):
+        for ino_number in range(number_ino_x):
+            ino = Ino(screen)
+            ino.x = 50 + 50 * ino_number
+            ino.y = 50 + 50 *row_ino
+            ino.rect.x = ino.x
+            ino.rect.y = ino.y
+            inos.add(ino)
