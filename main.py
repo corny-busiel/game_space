@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Group
+import controls
 
 def run():
     pygame.init()
@@ -8,8 +9,8 @@ def run():
     bacground_color = (0,0,0)
     
     while True:
-       screen.fill(bacground_color)      
-       pygame.display.flip()      
+        controls.event()
+        controls.update(bacground_color, screen)
     
     
 def main():
