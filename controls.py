@@ -1,6 +1,7 @@
 import pygame
 import sys
 from bullet import Bullet
+from ino import Ino
 
 def event(screen, gun, bullets):
     for event in pygame.event.get():
@@ -31,12 +32,12 @@ def event(screen, gun, bullets):
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = False
 
-def update(bacground_color,screen,gun, bullets, ino):
+def update(bacground_color,screen, gun,inos ,bullets ):
     screen.fill(bacground_color)
     for bullet in bullets:
         bullet.draw_bullet()
     gun.output() # функция отображение пушки
-    ino.draw_ino()
+    inos.draw(screen)
     pygame.display.flip() 
     
 def update_bullets(bullets):
@@ -44,3 +45,14 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+            
+def create_army(screen, inos):
+    ino = Ino(screen)
+    number_ino_x = 22
+    ino_width = ino.rect.width
+    
+    for ino_number in range(number_ino_x):
+        ino = Ino(screen)
+        ino.x = 50 + 50 * ino_number
+        ino.rect.x = ino.x
+        inos.add(ino)
