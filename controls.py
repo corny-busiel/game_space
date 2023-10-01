@@ -31,11 +31,12 @@ def event(screen, gun, bullets):
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = False
 
-def update(bacground_color,screen,gun, bullets):
+def update(bacground_color,screen,gun, bullets, ino):
     screen.fill(bacground_color)
     for bullet in bullets:
         bullet.draw_bullet()
     gun.output() # функция отображение пушки
+    ino.draw_ino()
     pygame.display.flip() 
     
 def update_bullets(bullets):

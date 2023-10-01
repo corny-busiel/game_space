@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Group
 import controls
 from gun import Gun
+from ino import Ino
 
 def run():
     pygame.init()
@@ -10,10 +11,11 @@ def run():
     gun = Gun(screen)
     bacground_color = (0,0,0)
     bullets = Group()
+    ino = Ino(screen)
     
     while True:
         controls.event(screen, gun, bullets)
-        controls.update(bacground_color ,screen, gun, bullets)
+        controls.update(bacground_color ,screen, gun, bullets, ino)
         controls.update_bullets(bullets)
         gun.update_gun() # вызов функции обновление позиции пушки
     
