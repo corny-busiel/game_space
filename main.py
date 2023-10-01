@@ -14,7 +14,7 @@ def run():
     while True:
         controls.event(screen, gun, bullets)
         controls.update(bacground_color ,screen, gun, bullets)
-        bullets.update()
+        controls.update_bullets(bullets)
         gun.update_gun() # вызов функции обновление позиции пушки
     
     

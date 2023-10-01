@@ -18,11 +18,11 @@ class Gun():
         self.screen.blit(self.image, self.rect)
         
     def update_gun(self): # функция обновления позиции пушки
-        if self.mright and self.rect.right < self.screen_rect.right:
+        if self.mright and self.rect.right <= self.screen_rect.right:
             self.rect.centerx += 1.8
-        if self.mleft and self.rect.left > 0:
+        if self.mleft and self.rect.left >= 0:
             self.rect.centerx -= 1.8
-        if self.mup and self.rect.top > 500:
+        if self.mup and self.rect.top >= 500:
             self.rect.centery -= 1.8
-        if self.mdown and self.rect.bottom < self.screen_rect.bottom:
+        if self.mdown and self.rect.bottom <= self.screen_rect.bottom:
             self.rect.centery += 1.8

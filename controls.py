@@ -37,3 +37,9 @@ def update(bacground_color,screen,gun, bullets):
         bullet.draw_bullet()
     gun.output() # функция отображение пушки
     pygame.display.flip() 
+    
+def update_bullets(bullets):
+    bullets.update()
+    for bullet in bullets.copy():
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
