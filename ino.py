@@ -1,3 +1,4 @@
+from typing import Any
 import pygame
 from pygame.sprite import Group
 
@@ -14,3 +15,7 @@ class Ino(pygame.sprite.Sprite):
         
     def draw(self):
         self.screen.blit(self.image, self.rect)
+        
+    def update(self):
+        self.y += 0.01
+        self.rect.y = self.y

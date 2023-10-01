@@ -18,6 +18,7 @@ def run():
         controls.event(screen, gun, bullets)
         controls.update(bacground_color ,screen, gun,inos, bullets )
         controls.update_bullets(bullets)
+        controls.update_inos(inos)
         gun.update_gun() # вызов функции обновление позиции пушки
     
     

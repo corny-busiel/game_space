@@ -46,6 +46,9 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
             
+def update_inos(inos):
+    inos.update()
+    
 def create_army(screen, inos):
     ino = Ino(screen)
     number_ino_x = 22
