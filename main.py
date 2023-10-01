@@ -9,10 +9,12 @@ def run():
     pygame.display.set_caption("Космическая игра")
     gun = Gun(screen)
     bacground_color = (0,0,0)
+    bullets = Group()
     
     while True:
-        controls.event(gun)
-        controls.update(bacground_color, screen, gun)
+        controls.event(screen, gun, bullets)
+        controls.update(bacground_color ,screen, gun, bullets)
+        bullets.update()
         gun.update_gun() # вызов функции обновление позиции пушки
     
     

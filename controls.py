@@ -1,7 +1,8 @@
 import pygame
 import sys
+from bullet import Bullet
 
-def event(gun):
+def event(screen, gun, bullets):
     for event in pygame.event.get():
         # событие выхода
             if event.type == pygame.QUIT:
@@ -15,6 +16,10 @@ def event(gun):
                     gun.mup = True
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = True
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    new_bullet = Bullet(screen, gun)
+                    bullets.add(new_bullet)
         # событие отпущенной клавиши
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
@@ -26,7 +31,9 @@ def event(gun):
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = False
 
-def update(bacground_color,screen,gun):
+def update(bacground_color,screen,gun, bullets):
     screen.fill(bacground_color)
+    for bullet in bullets:
+        bullet.draw_bullet()
     gun.output() # функция отображение пушки
     pygame.display.flip() 
