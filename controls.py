@@ -7,7 +7,7 @@ import time
 
 right_mouse_button_pressed = False
 
-def event(screen, gun, bullets):
+def event(screen, gun, bullets, stat):
     for event in pygame.event.get():
         # событие выхода
             if event.type == pygame.QUIT:
@@ -21,6 +21,8 @@ def event(screen, gun, bullets):
                     gun.mup = True
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = True
+                elif event.key == pygame.K_ESCAPE:
+                    stat.run_game = not stat.run_game
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                         new_bullet = Bullet(screen, gun)
@@ -51,17 +53,24 @@ def update_bullets(inos , bullets):
             bullets.remove(bullet)
     collisions = pygame.sprite.groupcollide(bullets, inos, True, True)
     
-
-def gun_kill(gun, stat, screen, inos, bullets):
-    stat.gun_left -= 1
+def create_game_if(inos, bullets, screen, gun):
     inos.empty()
     bullets.empty()
     create_army(screen, inos)
     gun.create_gun()
     time.sleep(2)
-    print(stat.gun_left)
-    
 
+def gun_kill(gun, stat, screen, inos, bullets):
+    if stat.gun_left > 0:
+        stat.gun_left -= 1
+        create_game_if(inos, bullets, screen, gun)
+        print(stat.gun_left)
+    else:
+        stat.run_game = False
+        print("Проиграл")
+        create_game_if(inos, bullets, screen, gun)
+        stat.gun_left = 3
+        stat.run_game = True
          
 def update_inos(gun,stats, screen, inos, bullets):
     inos.update()

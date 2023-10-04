@@ -19,11 +19,12 @@ def run():
     
     
     while True:
-        controls.event(screen, gun, bullets)
-        controls.update(bacground_color ,screen, gun,inos, bullets )
-        controls.update_bullets(inos , bullets)
-        controls.update_inos(gun,stat, screen, inos, bullets)
-        gun.update_gun()# вызов функции обновление позиции пушки
+        controls.event(screen, gun, bullets, stat)
+        if stat.run_game:
+            controls.update(bacground_color ,screen, gun,inos, bullets )
+            controls.update_bullets(inos , bullets)
+            controls.update_inos(gun,stat, screen, inos, bullets)
+            gun.update_gun()# вызов функции обновление позиции пушки
 
         
 def main():
