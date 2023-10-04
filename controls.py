@@ -38,20 +38,25 @@ def event(screen, gun, bullets, stat):
                 elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     gun.mdown = False
 
-def update(bacground_color,screen, gun,inos ,bullets ):
+def update(bacground_color ,screen,stat,scores, gun,inos, bullets ):
     screen.fill(bacground_color)
+    scores.show_score()
     for bullet in bullets:
         bullet.draw_bullet()
     gun.output() # функция отображение пушки
     inos.draw(screen)
     pygame.display.flip() 
     
-def update_bullets(inos , bullets):
+def update_bullets(screen, stats, scores,inos , bullets):
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
     collisions = pygame.sprite.groupcollide(bullets, inos, True, True)
+    if collisions:
+        for inos in collisions.values():
+            stats.score += 1 * len(inos)
+        scores.image_score()
     
 def create_game_if(inos, bullets, screen, gun):
     inos.empty()

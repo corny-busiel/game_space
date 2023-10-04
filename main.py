@@ -4,6 +4,7 @@ import controls
 from gun import Gun
 import stats
 import time
+from scores import Scores
 
 
 def run():
@@ -16,13 +17,14 @@ def run():
     inos = Group()
     controls.create_army(screen, inos)
     stat = stats.Stats()
+    scores = Scores(screen, stat)
     
     
     while True:
         controls.event(screen, gun, bullets, stat)
         if stat.run_game:
-            controls.update(bacground_color ,screen, gun,inos, bullets )
-            controls.update_bullets(inos , bullets)
+            controls.update(bacground_color ,screen,stat,scores, gun,inos, bullets )
+            controls.update_bullets(screen, stat, scores,inos , bullets)
             controls.update_inos(gun,stat, screen, inos, bullets)
             gun.update_gun()# вызов функции обновление позиции пушки
 
