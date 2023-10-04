@@ -67,6 +67,8 @@ def update_inos(gun,stats, screen, inos, bullets):
     inos.update()
     if pygame.sprite.spritecollide(gun, inos, True, None):
         gun_kill(gun,stats, screen, inos, bullets)
+    inos_check(stats,screen,gun, inos,bullets)  
+
 def create_army(screen, inos):
     ino = Ino(screen)
     number_ino_x = 22
@@ -79,3 +81,10 @@ def create_army(screen, inos):
             ino.rect.x = ino.x
             ino.rect.y = ino.y
             inos.add(ino)
+            
+def inos_check(stats, screen, gun, inos, bullets):
+    screen_rect = screen.get_rect()
+    for ino in inos.sprites():
+        if ino.rect.bottom >= screen_rect.bottom:
+            gun_kill(gun,stats, screen, inos, bullets)
+            break
