@@ -26,3 +26,6 @@ class Gun():
             self.rect.centery -= 1.8
         if self.mdown and self.rect.bottom <= self.screen_rect.bottom:
             self.rect.centery += 1.8
+            
+    def create_gun(self):
+        self.centerx = self.screen_rect.centerx

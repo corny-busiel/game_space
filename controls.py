@@ -2,6 +2,10 @@ import pygame
 import sys
 from bullet import Bullet
 from ino import Ino
+import time
+
+
+right_mouse_button_pressed = False
 
 def event(screen, gun, bullets):
     for event in pygame.event.get():
@@ -19,8 +23,8 @@ def event(screen, gun, bullets):
                     gun.mdown = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    new_bullet = Bullet(screen, gun)
-                    bullets.add(new_bullet)
+                        new_bullet = Bullet(screen, gun)
+                        bullets.add(new_bullet)
         # событие отпущенной клавиши
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
@@ -47,18 +51,31 @@ def update_bullets(inos , bullets):
             bullets.remove(bullet)
     collisions = pygame.sprite.groupcollide(bullets, inos, True, True)
     
-            
-def update_inos(inos):
-    inos.update()
+
+def gun_kill(gun, stat, screen, inos, bullets):
+    stat.gun_left -= 1
+    inos.empty()
+    bullets.empty()
+    create_army(screen, inos)
+    gun.create_gun()
+    time.sleep(2)
+    print(stat.gun_left)
     
+
+         
+def update_inos(gun,stats, screen, inos, bullets):
+    inos.update()
+    if pygame.sprite.spritecollide(gun, inos, True, None):
+        gun_kill(gun,stats, screen, inos, bullets)
 def create_army(screen, inos):
     ino = Ino(screen)
     number_ino_x = 22
-    for row_ino in range(5):
+    
+    for row_ino in range(150):
         for ino_number in range(number_ino_x):
             ino = Ino(screen)
             ino.x = 50 + 50 * ino_number
-            ino.y = 50 + 50 *row_ino
+            ino.y = -50 + -50 * row_ino
             ino.rect.x = ino.x
             ino.rect.y = ino.y
             inos.add(ino)

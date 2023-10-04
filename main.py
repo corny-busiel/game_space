@@ -2,6 +2,8 @@ import pygame
 from pygame.sprite import Group
 import controls
 from gun import Gun
+import stats
+import time
 
 
 def run():
@@ -13,17 +15,19 @@ def run():
     bullets = Group()
     inos = Group()
     controls.create_army(screen, inos)
+    stat = stats.Stats()
+    
     
     while True:
         controls.event(screen, gun, bullets)
         controls.update(bacground_color ,screen, gun,inos, bullets )
-        controls.update_bullets(inos,bullets)
-        controls.update_inos(inos)
-        gun.update_gun() # вызов функции обновление позиции пушки
-    
-    
+        controls.update_bullets(inos , bullets)
+        controls.update_inos(gun,stat, screen, inos, bullets)
+        gun.update_gun()# вызов функции обновление позиции пушки
+
+        
 def main():
-    run() # главная функция игры запуска
+    run() # главная функция игры запускаd
     
 if __name__ == "__main__":
     main()
