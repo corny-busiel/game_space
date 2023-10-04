@@ -17,5 +17,5 @@ class Ino(pygame.sprite.Sprite):
         self.screen.blit(self.image, self.rect)
         
     def update(self):
-        self.y += 0.2
+        self.y += 2
         self.rect.y = self.y

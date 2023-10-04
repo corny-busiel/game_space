@@ -57,6 +57,7 @@ def update_bullets(screen, stats, scores,inos , bullets):
         for inos in collisions.values():
             stats.score += 1 * len(inos)
         scores.image_score()
+        check_hight_score(stats,scores)
     
 def create_game_if(inos, bullets, screen, gun):
     inos.empty()
@@ -75,6 +76,7 @@ def gun_kill(gun, stat, screen, inos, bullets):
         print("Проиграл")
         create_game_if(inos, bullets, screen, gun)
         stat.gun_left = 3
+        stat.score = 0
         stat.run_game = True
          
 def update_inos(gun,stats, screen, inos, bullets):
@@ -102,3 +104,10 @@ def inos_check(stats, screen, gun, inos, bullets):
         if ino.rect.bottom >= screen_rect.bottom:
             gun_kill(gun,stats, screen, inos, bullets)
             break
+        
+def check_hight_score(stats, score):
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        score.image_score_hight()
+        with open("hight_score.txt", "w") as f:
+            f.write(str(stats.high_score))
